@@ -31,9 +31,11 @@ sub2api-4k-image-generator-ts/
 Create or update `.env` where you run the command:
 
 ```env
-SUB2API_BASE_URL=https://sub2api.online
+SUB2API_BASE_URL=https://your-sub2api.example.com
 SUB2API_API_KEY=sk-...
 ```
+
+Replace `https://your-sub2api.example.com` with your own deployed sub2api domain. You can also override it per command with `--base-url https://your-sub2api.example.com`.
 
 Install dependencies for development:
 

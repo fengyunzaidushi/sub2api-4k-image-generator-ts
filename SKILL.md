@@ -13,7 +13,7 @@ Use this skill when the user wants TypeScript/Node image generation through sub2
 2. Ensure `.env` or the process environment provides:
 
 ```env
-SUB2API_BASE_URL=https://sub2api.online
+SUB2API_BASE_URL=https://your-sub2api.example.com
 SUB2API_API_KEY=sk-...
 ```
 
@@ -37,6 +37,7 @@ npx tsx .\scripts\openai_4k_image_generator.ts "test prompt" --dry-run
 
 ## Notes
 
+- Replace `SUB2API_BASE_URL` with the user's own deployed sub2api domain.
 - Treat 4K as explicit pixel sizes: `3840x2160` or `2160x3840`.
 - Streaming is enabled by default to avoid Cloudflare 524 during slow 4K generation.
 - `*-partial-XX.png` files are diagnostics only; final images are saved as `<prefix>-XX.png`.

@@ -47,11 +47,11 @@ test("buildResponsesPayload includes image_generation tool and input image", () 
 });
 
 test("buildRequest selects images or responses URL", () => {
-  const imageReq = buildRequest(parseArgs(["x", "--base-url", "https://sub2api.online/"]));
-  assert.equal(imageReq.url, "https://sub2api.online/v1/images/generations");
+  const imageReq = buildRequest(parseArgs(["x", "--base-url", "https://your-sub2api.example.com/"]));
+  assert.equal(imageReq.url, "https://your-sub2api.example.com/v1/images/generations");
 
-  const responsesReq = buildRequest(parseArgs(["x", "--endpoint", "responses", "--base-url", "https://sub2api.online/"]));
-  assert.equal(responsesReq.url, "https://sub2api.online/v1/responses");
+  const responsesReq = buildRequest(parseArgs(["x", "--endpoint", "responses", "--base-url", "https://your-sub2api.example.com/"]));
+  assert.equal(responsesReq.url, "https://your-sub2api.example.com/v1/responses");
 });
 
 test("parseSSEText extracts final images API event", () => {
