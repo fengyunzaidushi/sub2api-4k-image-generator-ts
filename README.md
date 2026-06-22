@@ -1,34 +1,77 @@
-# sub2api-4k-image-generator-ts
+# sub2api 4K Image Generator TS Skill
 
-TypeScript-only local skill for generating and debugging high-resolution AI images through a sub2api OpenAI-compatible endpoint.
+[![skills.sh](https://skills.sh/b/fengyunzaidushi/sub2api-4k-image-generator-ts)](https://skills.sh/fengyunzaidushi/sub2api-4k-image-generator-ts)
 
-## Structure
+A Codex-compatible agent skill and TypeScript CLI for generating, streaming, saving, and debugging high-resolution AI images through a sub2api OpenAI-compatible endpoint.
 
-```text
-sub2api-4k-image-generator-ts/
-├── SKILL.md
-├── README.md
-├── package.json
-├── tsconfig.json
-├── scripts/
-│   ├── openai_4k_image_generator.ts # thin executable entrypoint
-│   ├── cli.ts                      # command orchestration
-│   ├── args.ts                     # CLI parsing and defaults
-│   ├── env.ts                      # .env loading and key masking
-│   ├── payload.ts                  # /images and /responses payload builders
-│   ├── request.ts                  # JSON and SSE HTTP requests
-│   ├── sse.ts                      # OpenAI image stream event parsing
-│   ├── save.ts                     # final and partial image saving
-│   ├── types.ts                    # shared types
-│   ├── errors.ts                   # typed CLI errors
-│   └── test.ts                     # local unit tests
-└── dist/
-    └── openai_4k_image_generator.js
+Use it when you need a local `SUB2API_BASE_URL` / `SUB2API_API_KEY` based image workflow for `/v1/images/generations` or `/v1/responses`, especially 4K outputs such as `3840x2160` and `2160x3840`, streaming partial-image diagnostics, and Cloudflare 524 timeout troubleshooting.
+
+## Install
+
+Install the current skill for Codex:
+
+```bash
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --skill sub2api-4k-image-generator-ts -a codex
 ```
 
-## Setup
+Install for all detected agents:
 
-Create or update `.env` where you run the command:
+```bash
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --skill sub2api-4k-image-generator-ts
+```
+
+List the skill detected in this repository without installing it:
+
+```bash
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --list
+```
+
+Use the skill prompt without installing:
+
+```bash
+npx skills use fengyunzaidushi/sub2api-4k-image-generator-ts@sub2api-4k-image-generator-ts
+```
+
+## Update
+
+Update the installed project skill to the latest version:
+
+```bash
+npx skills update sub2api-4k-image-generator-ts -p -y
+```
+
+Update the installed global skill:
+
+```bash
+npx skills update sub2api-4k-image-generator-ts -g -y
+```
+
+If you are unsure where it was installed, let `skills` choose the scope:
+
+```bash
+npx skills update sub2api-4k-image-generator-ts -y
+```
+
+## Use
+
+Example prompt after installation:
+
+```text
+Use $sub2api-4k-image-generator-ts to generate a 4K landscape image through my sub2api endpoint and save the final image path.
+```
+
+The skill will:
+
+- inspect the local `.env` or process environment for `SUB2API_BASE_URL` and `SUB2API_API_KEY`
+- generate explicit 4K payloads for `3840x2160` or `2160x3840`
+- prefer streaming requests so slow 4K jobs can avoid Cloudflare 524 failures
+- capture final images and partial diagnostic images from SSE events
+- support both `/v1/images/generations` and `/v1/responses`
+- report saved image paths and diagnostics without printing full API keys
+
+## CLI Setup
+
+Create or update `.env` where you run the CLI:
 
 ```env
 SUB2API_BASE_URL=https://your-sub2api.example.com
@@ -43,7 +86,7 @@ Install dependencies for development:
 npm install
 ```
 
-## Run
+## CLI Run
 
 Preferred compiled JavaScript:
 
@@ -71,7 +114,7 @@ Dry run:
 npm run dry-run
 ```
 
-## Useful Options
+## CLI Options
 
 - `--size 3840x2160` for landscape 4K
 - `--size 2160x3840` for portrait 4K
@@ -80,6 +123,52 @@ npm run dry-run
 - `--input-image ./input.png` with `--endpoint responses`
 - `--no-stream` to debug non-streaming behavior
 - `--dry-run` to print URL and JSON body without sending
+
+## Repository Layout
+
+```text
+.
+├── SKILL.md
+├── README.md
+├── agents/
+│   └── openai.yaml
+├── package.json
+├── tsconfig.json
+├── scripts/
+│   ├── openai_4k_image_generator.ts # thin executable entrypoint
+│   ├── cli.ts                       # command orchestration
+│   ├── args.ts                      # CLI parsing and defaults
+│   ├── env.ts                       # .env loading and key masking
+│   ├── payload.ts                   # /images and /responses payload builders
+│   ├── request.ts                   # JSON and SSE HTTP requests
+│   ├── sse.ts                       # OpenAI image stream event parsing
+│   ├── save.ts                      # final and partial image saving
+│   ├── types.ts                     # shared types
+│   ├── errors.ts                    # typed CLI errors
+│   └── test.ts                      # local unit tests
+└── dist/
+    └── openai_4k_image_generator.js
+```
+
+## Validate
+
+Run the local test suite:
+
+```powershell
+npm test
+```
+
+Build the compiled CLI:
+
+```powershell
+npm run build
+```
+
+Check `skills.sh` / `npx skills` repository detection:
+
+```bash
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --list
+```
 
 ## Diagnostics
 
@@ -97,3 +186,7 @@ npm run build
 ```
 
 The tests cover argument defaults, payload construction, URL selection, final image SSE extraction, partial image SSE extraction, response summaries, and API key masking.
+
+## Topics
+
+`codex-skill`, `agent-skills`, `skills-sh`, `sub2api`, `openai-compatible`, `image-generation`, `4k-image-generator`, `typescript`, `nodejs`, `sse-streaming`, `cloudflare-524`, `responses-api`, `images-generations`
