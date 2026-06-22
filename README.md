@@ -34,23 +34,21 @@ npx skills use fengyunzaidushi/sub2api-4k-image-generator-ts@sub2api-4k-image-ge
 
 ## Update
 
-Update the installed project skill to the latest version:
+Recommended way to refresh the Codex install:
 
 ```bash
-npx skills update sub2api-4k-image-generator-ts -p -y
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --skill sub2api-4k-image-generator-ts -a codex -y --copy
 ```
 
-Update the installed global skill:
+Refresh all detected agents:
 
 ```bash
-npx skills update sub2api-4k-image-generator-ts -g -y
+npx skills add fengyunzaidushi/sub2api-4k-image-generator-ts --skill sub2api-4k-image-generator-ts --all --copy
 ```
 
-If you are unsure where it was installed, let `skills` choose the scope:
+Why this uses `skills add` instead of `skills update`:
 
-```bash
-npx skills update sub2api-4k-image-generator-ts -y
-```
+`npx skills update sub2api-4k-image-generator-ts -p -y` may fail with `Failed to check for deleted skills` or `Failed to update`. In that case, run the recommended `skills add ... -y --copy` command above to overwrite the installed copy with the latest repository version.
 
 ## Use
 
